@@ -23,7 +23,7 @@ module "aws-ecs-service" {
 }
 
 module "networking" {
-  source       = "./modules/networking"
+  source       = "./modules/aws-networking"
   project_name = var.project_name
   cidr_vpc     = var.cidr_vpc
 }
