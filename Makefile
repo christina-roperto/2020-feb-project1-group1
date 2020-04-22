@@ -32,3 +32,10 @@ destroy:
 
 _destroy:
 	bash -x scripts/destroy.sh
+
+clean:
+	docker-compose down -v --rmi all --remove-orphans
+	@make _clean
+
+_clean:
+	bash -x scripts/clean.sh

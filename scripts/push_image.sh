@@ -4,3 +4,5 @@ aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS
 docker build -t wordpress:latest -f ./docker/wordpress/Dockerfile .
 docker tag wordpress:latest $repo_name:latest
 docker push $repo_name:latest
+
+rm -f ./terraform/aws-ecr/repo.tx
