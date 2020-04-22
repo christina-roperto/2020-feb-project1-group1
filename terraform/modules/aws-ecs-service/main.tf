@@ -15,7 +15,7 @@ resource "aws_ecs_service" "ecs" {
 resource "aws_security_group" "ecs_sg" {
   description = "controls access to the ECS"
 
-  vpc_id = "${var.vpc_id}"
+  vpc_id = var.vpc_id
   name   = "tf-ecs-sg"
 
   ingress {
