@@ -1,6 +1,7 @@
-repo_name=$(cut -d " " -f 3 ./terraform/aws-ecr/repo.txt)
+repo_name=cat ./terraform/aws-ecr/repo.txt | sed -n -e 's/^.*repository_url = //p'
+repo_pass=cat ./terraform/aws-ecr/repo.txt | sed -n -e 's/^.*pass = //p'
 
-aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin $repo_name
+docker login --username AWS --password $repo_pass $repo_name
 docker build -t wordpress:latest -f ./docker/wordpress/Dockerfile .
 docker tag wordpress:latest $repo_name:latest
 docker push $repo_name:latest
