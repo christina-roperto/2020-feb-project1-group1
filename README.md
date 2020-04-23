@@ -59,3 +59,10 @@ Destory all the infrastructure created on AWS
 ```
 make destroy
 ```
+
+Clean:
+
+Delete files and docker images created on plan, build and deploy targets.
+```
+make clean
+```
