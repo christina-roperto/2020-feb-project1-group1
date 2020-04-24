@@ -66,3 +66,10 @@ variable "file_system_type" {
   default = "nfs"
 }
 
+variable "project_name" {
+  type = string
+}
+
+variable "repository_url" {
+  type = string
+}

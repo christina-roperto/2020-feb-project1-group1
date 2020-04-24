@@ -5,10 +5,11 @@ module "aws-ecs-cluster" {
 }
 
 module "aws-ecs-task-def" {
-  source = "./modules/aws-ecs-task-def"
-
-  family                    = "wordpress"
-  file_system_dns_name      = module.aws-efs.dns_name
+  source               = "./modules/aws-ecs-task-def"
+  repository_url       = var.repository_url
+  family               = "wordpress"
+  file_system_dns_name = module.aws-efs.dns_name
+  project_name         = var.project_name
 }
 
 module "aws-ecs-service" {

@@ -12,7 +12,6 @@ plan:
 
 _plan:
 	bash -x scripts/plan_ecr.sh
-	bash -x scripts/plan_aws.sh
 
 build:
 	$(COMPOSE_RUN) make _build
@@ -20,6 +19,7 @@ build:
 
 _build:
 	bash -x scripts/apply_ecr.sh
+	bash -x scripts/plan_aws.sh
 
 deploy:
 	$(COMPOSE_RUN) make _deploy

@@ -1,3 +1,7 @@
+data "aws_iam_role" "ecs_role" {
+  name = "ecsTaskExecutionRole"
+}
+
 # AWS Task Definition
 resource "aws_ecs_task_definition" "project_1" {
   family                   = var.family
@@ -6,12 +10,13 @@ resource "aws_ecs_task_definition" "project_1" {
   memory                   = var.memory
   network_mode             = var.network_mode
   tags                     = var.tags
+  execution_role_arn       = data.aws_iam_role.ecs_role.arn
 
   container_definitions = jsonencode(
     [
       {
         name      = "project_1"
-        image     = "wordpress:latest"
+        image     = "${var.repository_url}:latest"
         essential = true
         cpu       = 256
         memory    = 512
