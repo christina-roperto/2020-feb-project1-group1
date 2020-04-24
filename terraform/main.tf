@@ -8,7 +8,6 @@ module "aws-ecs-task-def" {
   source = "./modules/aws-ecs-task-def"
 
   family                    = "wordpress"
-  container_definition_file = var.container_definition_file
   file_system_dns_name      = module.aws-efs.dns_name
 }
 

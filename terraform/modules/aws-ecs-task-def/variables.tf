@@ -4,11 +4,6 @@ variable "family" {
   description = "A unique name for your task definition."
 }
 
-variable "container_definition_file" {
-  type        = string
-  description = "A list of valid container definitions provided as a single valid JSON document."
-}
-
 variable "file_system_dns_name" {
   type        = string
   description = "The DNS name for the given subnet/AZ per documented convention https://docs.aws.amazon.com/efs/latest/ug/mounting-fs-mount-cmd-dns-name.html."
