@@ -1,4 +1,13 @@
+# Terraform metadata
 .terraform
 .tfstate
-terraform.tfstate.*.backup
-/.env
+terraform.tfstate*
+
+# Personal configuration
+.env
+terraform.tfvars
+
+# Make artifacts
+/terraform/aws
+/terraform/aws-ecr/ecr
+/terraform/aws-ecr/repo.txt
