@@ -1,5 +1,5 @@
 #Makefile
-COMPOSE_RUN = docker-compose run --rm terraform
+COMPOSE_RUN = docker-compose run --rm tf012aws2
 
 #.SILENT
 
@@ -40,3 +40,6 @@ clean:
 
 _clean:
 	bash -x scripts/clean.sh
+
+shellTerraform:
+	$(COMPOSE_RUN)

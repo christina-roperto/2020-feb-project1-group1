@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
 
-  terraform:
+  tf012aws2:
     build:
         context: .
         dockerfile: ./docker/Dockerfile
@@ -10,3 +10,4 @@ services:
     working_dir: /code
     volumes:
         - .:/code
+        - ~/.aws:/root/.aws
