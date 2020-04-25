@@ -69,6 +69,7 @@ resource "aws_ssm_parameter" "db_host" {
   name  = "PROJ1_DB_HOST"
   type  = "SecureString"
   value =  aws_rds_cluster.default.endpoint
+  overwrite = true
 
 }
 
@@ -76,6 +77,7 @@ resource "aws_ssm_parameter" "db_name" {
   name  = "PROJ1_DB_NAME"
   type  = "SecureString"
   value =  var.database_name
+  overwrite = true
 
 } 
 
