@@ -1,12 +1,34 @@
+data "aws_iam_role" "ecs_role" {
+  name = "ecsTaskExecutionRole"
+}
+
 # AWS Task Definition
 resource "aws_ecs_task_definition" "project_1" {
   family                   = var.family
-  container_definitions    = file(var.container_definition_file)
   requires_compatibilities = var.requires_compatibilities
   cpu                      = var.cpu
   memory                   = var.memory
   network_mode             = var.network_mode
   tags                     = var.tags
+  execution_role_arn       = data.aws_iam_role.ecs_role.arn
+
+  container_definitions = jsonencode(
+    [
+      {
+        name      = "project_1"
+        image     = "${var.repository_url}:latest"
+        essential = true
+        cpu       = 256
+        memory    = 512
+        portMappings = [
+          {
+            containerPort = 80
+            hostPort      = 80
+          }
+        ]
+      }
+    ]
+  )
 
   volume {
     name = var.volume_name

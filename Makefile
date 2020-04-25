@@ -25,6 +25,7 @@ deploy:
 	$(COMPOSE_RUN) make _deploy
 
 _deploy:
+	bash -x scripts/plan_aws.sh
 	bash -x scripts/apply_aws.sh
 
 destroy:
@@ -34,8 +35,8 @@ _destroy:
 	bash -x scripts/destroy.sh
 
 clean:
-	docker-compose down -v --rmi all --remove-orphans
-	@make _clean
+	docker-compose down -v
+	make _clean
 
 _clean:
 	bash -x scripts/clean.sh

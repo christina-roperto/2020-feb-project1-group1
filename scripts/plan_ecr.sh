@@ -1,3 +1,3 @@
-cd /code/terraform/aws-ecr
+cd /code/terraform
 terraform init
-terraform plan -out ecr
+terraform plan -target module.aws-ecr -out ecr
