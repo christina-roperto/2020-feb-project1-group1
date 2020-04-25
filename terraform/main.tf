@@ -60,3 +60,10 @@ module "aurora-db" {
     timeout_action           = "ForceApplyCapacityChange"
   }
 }
+
+module "cloudwatch" {
+  source         = "./modules/aws-cloudwatch"
+  project_name   = var.project_name
+  alert_sms      = var.alert_sms
+  rds_cluster_id = module.aurora-db.cluster_identifier
+}

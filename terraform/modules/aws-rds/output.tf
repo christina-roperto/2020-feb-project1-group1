@@ -23,3 +23,7 @@ output "default_rds_cluster_reader_endpoint" {
   description = "The cluster reader endpoint"
   value       = aws_rds_cluster.default.reader_endpoint
 }
+
+output "cluster_identifier" {
+  value = aws_rds_cluster.default.cluster_identifier
+}
