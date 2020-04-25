@@ -1,11 +1,11 @@
 #Makefile
-COMPOSE_RUN = docker-compose run --rm terraform
+COMPOSE_RUN = docker-compose run --rm tf012aws2
 
 #.SILENT
 
-.PHONY: plan build deploy
+.PHONY: plan build deploy shell
 
-all: plan build deploy
+all: plan build deploy shell
 
 plan:
 	$(COMPOSE_RUN) make _plan
@@ -40,3 +40,6 @@ clean:
 
 _clean:
 	bash -x scripts/clean.sh
+
+shell:
+	$(COMPOSE_RUN)

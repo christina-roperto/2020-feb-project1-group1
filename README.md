@@ -12,6 +12,7 @@ Solution based on AWS to install wordpress site with Fargate and Aurora DB Clust
 - Docker-compose 
 - Git
 - Bash
+- AWS CLI
 
 ## Usage
 
@@ -21,12 +22,15 @@ Clone or download the repository:
 git clone https://github.com/devopsacademyau/2020-feb-project1-group1.git
 ```
 
-Copy `.env.example` to `.env` and fill the variables:
+Set up your AWS credentials:
 
 ```
-AWS_ACCESS_KEY_ID="<id>"
-AWS_SECRET_ACCESS_KEY="<key>"
-AWS_DEFAULT_REGION="<region>"
+aws configure
+```
+
+Fill the variables on `.env`:
+
+```
 TF_VAR_project_name="<string>"
 TF_VAR_db_username="<string>"
 TF_VAR_db_password="<string>"
