@@ -4,9 +4,15 @@ module "aws-ecs-cluster" {
   project_env  = var.project_env
 }
 
+
+module "aws-ecr" {
+  source               = "./modules/aws-ecr"
+  project_name         = var.project_name
+}
+
 module "aws-ecs-task-def" {
   source               = "./modules/aws-ecs-task-def"
-  repository_url       = var.repository_url
+  repository_url       = module.aws-ecr.repository_url
   family               = var.project_name
   file_system_dns_name = module.aws-efs.dns_name
   project_name         = var.project_name

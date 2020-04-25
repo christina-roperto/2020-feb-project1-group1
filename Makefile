@@ -12,6 +12,7 @@ plan:
 
 _plan:
 	bash -x scripts/plan_ecr.sh
+	bash -x scripts/plan_aws.sh
 
 build:
 	$(COMPOSE_RUN) make _build
@@ -19,12 +20,12 @@ build:
 
 _build:
 	bash -x scripts/apply_ecr.sh
-	bash -x scripts/plan_aws.sh
 
 deploy:
 	$(COMPOSE_RUN) make _deploy
 
 _deploy:
+	bash -x scripts/plan_aws.sh
 	bash -x scripts/apply_aws.sh
 
 destroy:
@@ -34,8 +35,8 @@ _destroy:
 	bash -x scripts/destroy.sh
 
 clean:
-	docker-compose down -v --rmi all --remove-orphans
-	@make _clean
+	docker-compose down -v
+	make _clean
 
 _clean:
 	bash -x scripts/clean.sh

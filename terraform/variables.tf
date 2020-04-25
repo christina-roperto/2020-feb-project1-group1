@@ -21,8 +21,3 @@ variable "cidr_vpc" {
   description = "CIDR block for the VPC"
   default     = "10.10.0.0/16"
 }
-
-variable "repository_url" {
-  type        = string
-  description = "ECR url"
-}
