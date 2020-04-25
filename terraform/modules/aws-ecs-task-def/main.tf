@@ -20,6 +20,24 @@ resource "aws_ecs_task_definition" "project_1" {
         essential = true
         cpu       = 256
         memory    = 512
+        secrets = [
+          { 
+            name = "WORDPRESS_DB_HOST"
+            valueFrom = "PROJ1_DB_HOST"
+          },
+          { 
+            name = "WORDPRESS_DB_USER"
+            valueFrom = "PROJ1_DB_USER"
+          }, 
+          { 
+            name = "WORDPRESS_DB_PASSWORD"
+            valueFrom = "PROJ1_DB_PASSWORD"
+          }, 
+          { 
+            name = "WORDPRESS_DB_NAME"
+            valueFrom = "PROJ1_DB_NAME"
+          }             
+        ]
         portMappings = [
           {
             containerPort = 80
@@ -45,4 +63,28 @@ resource "aws_ecs_task_definition" "project_1" {
       }
     }
   }
+}
+
+resource "aws_iam_policy" "get_ssm" {
+  name        = "ECS-Secrets"
+  path        = "/"
+  description = "Get parameters SSM"
+
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ssm:GetParameters",
+            "Resource": "*"
+        }
+    ]
+}
+EOF
+}
+
+resource "aws_iam_role_policy_attachment" "ssm-attach" {
+  role       = data.aws_iam_role.ecs_role.name
+  policy_arn = aws_iam_policy.get_ssm.arn
 }

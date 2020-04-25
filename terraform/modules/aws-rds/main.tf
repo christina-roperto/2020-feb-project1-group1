@@ -14,8 +14,8 @@ resource "aws_rds_cluster" "default" {
   engine_version            = var.engine_version
   port                      = var.port
   database_name             = var.database_name
-  master_username           = var.db_username
-  master_password           = var.db_password
+  master_username           = data.aws_ssm_parameter.db_user.value
+  master_password           = data.aws_ssm_parameter.db_password.value
   availability_zones        = var.availability_zones
   vpc_security_group_ids    = [aws_security_group.default.id]
   skip_final_snapshot       = var.skip_final_snapshot
@@ -63,4 +63,26 @@ resource "aws_security_group" "default" {
   tags = {
     Name = "allow_rds"
   }
+}
+
+resource "aws_ssm_parameter" "db_host" {
+  name  = "PROJ1_DB_HOST"
+  type  = "SecureString"
+  value =  aws_rds_cluster.default.endpoint
+
+}
+
+resource "aws_ssm_parameter" "db_name" {
+  name  = "PROJ1_DB_NAME"
+  type  = "SecureString"
+  value =  var.database_name
+
+} 
+
+data "aws_ssm_parameter" "db_user" {
+  name = "PROJ1_DB_USER"
+}
+
+data "aws_ssm_parameter" "db_password" {
+  name = "PROJ1_DB_PASSWORD"
 }

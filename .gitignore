@@ -4,6 +4,7 @@
 terraform.tfstate*
 
 # Personal configuration
+.env
 terraform.tfvars
 
 # Make artifacts

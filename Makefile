@@ -3,11 +3,19 @@ COMPOSE_RUN = docker-compose run --rm tf012aws2
 
 #.SILENT
 
-.PHONY: plan build deploy shell
+.PHONY: prepare plan build deploy clean cmurlshell
 
-all: plan build deploy shell
+all: plan build deploy
+
+prepare:
+	cp .env.example .env
+	$(COMPOSE_RUN) make _prepare
+
+_prepare:
+	bash -x scripts/ssm_parameters.sh
 
 plan:
+	make prepare
 	$(COMPOSE_RUN) make _plan
 
 _plan:

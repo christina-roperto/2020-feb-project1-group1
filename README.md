@@ -28,12 +28,11 @@ Set up your AWS credentials:
 aws configure
 ```
 
-Fill the variables on `.env`:
+Fill the variables on `.env.example`:
 
 ```
 TF_VAR_project_name="<string>"
-TF_VAR_db_username="<string>"
-TF_VAR_db_password="<string>"
+TF_VAR_alert_sms="<+61xxxxxxxxx>"
 ```
 
 Plan:
