@@ -13,6 +13,7 @@ variable "cidr_vpc" {
 }
 
 variable "alert_sms" {
-  type = string
+  type        = string
   description = "Mobile number that will receive cloudwatch alerts, example: +614xxxxxxxx"
+  default     = ""
 }
