@@ -43,8 +43,6 @@ module "aws-efs" {
 module "aurora-db" {
   source = "./modules/aws-rds"
 
-  db_username        = var.db_username
-  db_password        = var.db_password
   vpc_id             = module.networking.vpc_id
   subnet_ids         = module.networking.subnet_private_ids
   availability_zones = module.networking.availability_zone_names
