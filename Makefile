@@ -1,5 +1,5 @@
 #Makefile
-COMPOSE_RUN = docker-compose run --rm tf012aws2
+COMPOSE_RUN = docker-compose build && docker-compose run --rm tf012aws2
 
 #.SILENT
 
@@ -8,7 +8,7 @@ COMPOSE_RUN = docker-compose run --rm tf012aws2
 all: plan build deploy
 
 prepare:
-	cp .env.example .env
+	if [ ! -f .env ]; then cp -v .env.example .env ; fi
 	$(COMPOSE_RUN) make _prepare
 
 _prepare:
