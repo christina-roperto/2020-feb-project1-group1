@@ -28,37 +28,32 @@ Set up your AWS credentials:
 aws configure
 ```
 
-
-## Prepare (optional)
+Prepare (optional)
 
 Run `make prepare` and edit your `.env` file to your preferences.
 
-
-## Plan:
+Plan:
 
 Create an execution plan:
 ```
 make plan
 ```
 
-
-## Build:
+Build:
 
 Create an ECR repository, build wordpress docker image and push to the repository created:
 ```
 make build
 ```
 
-
-## Deploy:
+Deploy:
 
 Deploy the infrastructure on AWS using the docker image pushed to ECR
 ```
 make deploy
 ```
 
-
-## Destroy:
+Destroy:
 
 **WARNING:** This will delete your configuration, database, EFS and all other resources.
 
@@ -67,8 +62,7 @@ Destory all the infrastructure created on AWS
 make destroy
 ```
 
-
-## Clean:
+Clean:
 
 Delete files and docker images created on plan, build and deploy targets.
 ```
