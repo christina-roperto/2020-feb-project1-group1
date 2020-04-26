@@ -60,6 +60,8 @@ make deploy
 
 ## Destroy:
 
+**WARNING:** This will delete your configuration, database, EFS and all other resources.
+
 Destory all the infrastructure created on AWS
 ```
 make destroy
@@ -67,8 +69,6 @@ make destroy
 
 
 ## Clean:
-
-**WARNING:** This will delete your configuration, database, EFS and all other resources.
 
 Delete files and docker images created on plan, build and deploy targets.
 ```
