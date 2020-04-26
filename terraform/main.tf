@@ -4,10 +4,9 @@ module "aws-ecs-cluster" {
   project_env  = var.project_env
 }
 
-
 module "aws-ecr" {
-  source               = "./modules/aws-ecr"
-  project_name         = var.project_name
+  source       = "./modules/aws-ecr"
+  project_name = var.project_name
 }
 
 module "aws-ecs-task-def" {
@@ -18,14 +17,28 @@ module "aws-ecs-task-def" {
   project_name         = var.project_name
 }
 
+module "aws-alb" {
+  source       = "./modules/aws-alb"
+  alb_name     = "${var.project_name}-alb"
+  alb_port     = 80
+  alb_protocol = "HTTP"
+  vpc_id       = module.networking.vpc_id
+  subnet_ids   = module.networking.subnet_public_ids
+}
+
 module "aws-ecs-service" {
   source = "./modules/aws-ecs-service"
 
-  cluster_id   = module.aws-ecs-cluster.id
-  task_arn     = module.aws-ecs-task-def.arn
-  project_name = var.project_name
-  subnet_ids   = module.networking.subnet_public_ids
-  vpc_id       = module.networking.vpc_id
+  cluster_id              = module.aws-ecs-cluster.id
+  ecs_task_definition_arn = module.aws-ecs-task-def.arn
+  project_name            = var.project_name
+  subnet_ids              = module.networking.subnet_public_ids
+  vpc_id                  = module.networking.vpc_id
+  alb_id                  = module.aws-alb.alb_main_id
+  security_group_id       = module.aws-alb.alb_security_group_id
+  container_name          = "project_1"
+  container_port          = "80"
+  target_group_arn        = module.aws-alb.alb_target_group_arn
 }
 
 module "networking" {
