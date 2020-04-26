@@ -1,9 +1,10 @@
 ## ALB
 resource "aws_alb_target_group" "main" {
-  name     = var.alb_name
-  port     = var.alb_port
-  protocol = var.alb_protocol
-  vpc_id   = var.vpc_id
+  name        = var.alb_name
+  port        = var.alb_port
+  protocol    = var.alb_protocol
+  vpc_id      = var.vpc_id
+  target_type = "ip"
 }
 
 resource "aws_alb" "main" {
