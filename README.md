@@ -28,42 +28,47 @@ Set up your AWS credentials:
 aws configure
 ```
 
-Fill the variables on `.env.example`:
 
-```
-TF_VAR_project_name="<string>"
-TF_VAR_alert_sms="<+61xxxxxxxxx>"
-```
+## Prepare (optional)
 
-Plan:
+Run `make prepare` and edit your `.env` file to your preferences.
+
+
+## Plan:
 
 Create an execution plan:
 ```
 make plan
 ```
 
-Build:
+
+## Build:
 
 Create an ECR repository, build wordpress docker image and push to the repository created:
 ```
 make build
 ```
 
-Deploy:
+
+## Deploy:
 
 Deploy the infrastructure on AWS using the docker image pushed to ECR
 ```
 make deploy
 ```
 
-Destroy:
+
+## Destroy:
 
 Destory all the infrastructure created on AWS
 ```
 make destroy
 ```
 
-Clean:
+
+## Clean:
+
+**WARNING:** This will delete your configuration, database, EFS and all other resources.
 
 Delete files and docker images created on plan, build and deploy targets.
 ```
