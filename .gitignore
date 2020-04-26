@@ -9,5 +9,5 @@ terraform.tfvars
 
 # Make artifacts
 /terraform/aws
-/terraform/aws-ecr/ecr
-/terraform/aws-ecr/repo.txt
+/terraform/ecr
+/terraform/repo.txt

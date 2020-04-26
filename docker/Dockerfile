@@ -1,4 +1,4 @@
-FROM ubuntu:18.04 as terraform
+FROM ubuntu:18.04 as tf012aws2
 
 RUN apt-get update && apt-get install curl make unzip sudo less -y && \
     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
