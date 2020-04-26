@@ -20,7 +20,7 @@ module "aws-ecs-task-def" {
 module "aws-alb" {
   source       = "./modules/aws-alb"
   alb_name     = "${var.project_name}-alb"
-  alb_port     = 8080
+  alb_port     = 80
   alb_protocol = "HTTP"
   vpc_id       = module.networking.vpc_id
   subnet_ids   = module.networking.subnet_public_ids
@@ -77,4 +77,3 @@ module "cloudwatch" {
   alert_sms      = var.alert_sms
   rds_cluster_id = module.aurora-db.cluster_identifier
 }
-
