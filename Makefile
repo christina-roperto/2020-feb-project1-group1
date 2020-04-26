@@ -1,5 +1,5 @@
 #Makefile
-COMPOSE_RUN = docker-compose run --rm tf012aws2
+COMPOSE_RUN = docker-compose build && docker-compose run --rm tf012aws2
 
 #.SILENT
 

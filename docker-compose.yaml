@@ -4,8 +4,7 @@ services:
 
   tf012aws2:
     build:
-        context: .
-        dockerfile: ./docker/Dockerfile
+        context: docker/makefile
     env_file: .env
     working_dir: /code
     volumes:
