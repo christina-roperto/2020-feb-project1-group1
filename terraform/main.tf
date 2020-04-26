@@ -38,6 +38,7 @@ module "aws-ecs-service" {
   security_group_id       = module.aws-alb.alb_security_group_id
   container_name          = "project_1"
   container_port          = "80"
+  target_group_arn        = module.aws-alb.alb_target_group_arn
 }
 
 module "networking" {
