@@ -57,6 +57,7 @@ module "aws-efs" {
   project_name = var.project_name
   subnet_ids   = module.networking.subnet_private_ids
   sg_id = module.aws-alb.alb_security_group_id
+  vpc_id = module.networking.vpc_id
 }
 
 module "aurora-db" {

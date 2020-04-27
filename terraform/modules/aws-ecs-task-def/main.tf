@@ -25,6 +25,7 @@ resource "aws_ecs_task_definition" "project_1" {
             sourceVolume = var.volume_name
             containerPath = "/var/www/html"
             readOnly = false
+          }
         ],
         secrets = [
           { 
