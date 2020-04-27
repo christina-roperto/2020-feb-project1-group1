@@ -5,6 +5,12 @@ resource "aws_alb_target_group" "main" {
   protocol    = var.alb_protocol
   vpc_id      = var.vpc_id
   target_type = "ip"
+  health_check {
+    enabled = true
+    interval = 30
+    path = "/"
+    matcher = "200-399"
+  }
 }
 
 resource "aws_alb" "main" {

@@ -4,7 +4,6 @@ variable "alb_name" {
 
 variable "alb_port" {
   type    = string
-  default = 8080
 }
 
 variable "alb_protocol" {

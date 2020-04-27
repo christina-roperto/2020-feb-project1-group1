@@ -20,6 +20,13 @@ resource "aws_ecs_task_definition" "project_1" {
         essential = true
         cpu       = 256
         memory    = 512
+        mountPoints = [
+          {
+            sourceVolume = var.volume_name
+            containerPath = "/var/www/html"
+            readOnly = false
+          }
+        ],
         secrets = [
           { 
             name = "WORDPRESS_DB_HOST"
@@ -53,7 +60,7 @@ resource "aws_ecs_task_definition" "project_1" {
 
     efs_volume_configuration {
       file_system_id = var.file_system_id
-      root_directory = "/opt/data"
+      root_directory = "/"
     }
   }
 }
