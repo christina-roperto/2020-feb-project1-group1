@@ -14,6 +14,7 @@ module "aws-ecs-task-def" {
   repository_url       = module.aws-ecr.repository_url
   family               = var.project_name
   file_system_dns_name = module.aws-efs.dns_name
+  file_system_id       = module.aws-efs.id
   project_name         = var.project_name
 }
 
@@ -39,6 +40,10 @@ module "aws-ecs-service" {
   container_name          = "project_1"
   container_port          = "80"
   target_group_arn        = module.aws-alb.alb_target_group_arn
+
+  ecs_service_depends_on = [
+    module.aws-alb
+  ]
 }
 
 module "networking" {
