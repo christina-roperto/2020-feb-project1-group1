@@ -55,18 +55,6 @@ resource "aws_ecs_task_definition" "project_1" {
       file_system_id = var.file_system_id
       root_directory = "/opt/data"
     }
-
-    # docker_volume_configuration {
-    #   scope         = var.volume_scope
-    #   autoprovision = var.volume_autoprovision
-    #   driver        = var.volume_driver
-
-    #   driver_opts = {
-    #     "type"   = var.file_system_type
-    #     "device" = "${var.file_system_dns_name}:/"
-    #     "o"      = "addr=${var.file_system_dns_name},rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport"
-    #   }
-    # }
   }
 }
 
