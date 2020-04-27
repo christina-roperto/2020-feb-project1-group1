@@ -4,6 +4,10 @@ variable "family" {
   description = "A unique name for your task definition."
 }
 
+variable "file_system_id" {
+  type        = string
+}
+
 variable "file_system_dns_name" {
   type        = string
   description = "The DNS name for the given subnet/AZ per documented convention https://docs.aws.amazon.com/efs/latest/ug/mounting-fs-mount-cmd-dns-name.html."

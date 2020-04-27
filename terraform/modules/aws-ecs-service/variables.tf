@@ -37,3 +37,7 @@ variable "security_group_id" {
 variable "target_group_arn" {
   type = string
 }
+
+variable "ecs_service_depends_on" {
+  type = any
+}
