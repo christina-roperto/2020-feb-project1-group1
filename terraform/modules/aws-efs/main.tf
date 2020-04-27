@@ -24,7 +24,7 @@ resource "aws_security_group" "efs_sg" {
     protocol    = "tcp"
     from_port   = 2049
     to_port     = 2049
-    cidr_blocks = [var.sg_id]
+    security_groups = [var.sg_id]
   }
 
   egress {
