@@ -2,9 +2,6 @@ data "aws_iam_role" "ecs_role" {
   name = "ecsTaskExecutionRole"
 }
 
-data "aws_region" "current" {
-}
-
 # AWS Task Definition
 resource "aws_ecs_task_definition" "project_1" {
   family                   = var.family
@@ -54,14 +51,6 @@ resource "aws_ecs_task_definition" "project_1" {
             hostPort      = 80
           }
         ]
-        logConfiguration = {
-          logDriver = "awslogs"
-          options = {
-            awslogs-group         = "/ecs/${var.project_name}"
-            awslogs-region        = data.aws_region.current.name
-            awslogs-stream-prefix = "ecs"
-          }
-        }
       }
     ]
   )
