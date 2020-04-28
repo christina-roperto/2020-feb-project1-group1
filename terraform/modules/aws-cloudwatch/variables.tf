@@ -12,3 +12,8 @@ variable "rds_cluster_id" {
   type = string
   description = "RDS cluster to monitor"
 }
+
+variable "alb_arn_suffix" {
+  type = string
+  description = "ALB to monitor"
+}

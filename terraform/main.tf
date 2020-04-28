@@ -84,4 +84,5 @@ module "cloudwatch" {
   project_name   = var.project_name
   alert_sms      = var.alert_sms
   rds_cluster_id = module.aurora-db.cluster_identifier
+  alb_arn_suffix = module.aws-alb.alb_arn_suffix
 }

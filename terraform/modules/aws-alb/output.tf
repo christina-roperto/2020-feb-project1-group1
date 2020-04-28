@@ -13,3 +13,7 @@ output "alb_main_hostname" {
 output "alb_target_group_arn" {
   value = aws_alb_target_group.main.arn
 }
+
+output "alb_arn_suffix" {
+  value = aws_alb.main.arn_suffix
+}
