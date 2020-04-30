@@ -1,5 +1,29 @@
-data "aws_iam_role" "ecs_role" {
-  name = "ecsTaskExecutionRole"
+resource "aws_iam_role" "ecs_role" {
+  name = "${var.project_name}-ecsTaskExecutionRole"
+  assume_role_policy = jsonencode(
+    {
+      Version = "2012-10-17"
+      Statement = [
+        {
+          Effect = "Allow"
+          Action = "sts:AssumeRole"
+          Principal = {
+            Service = "ecs-tasks.amazonaws.com"
+          }
+        },
+      ]
+    }
+  )
+}
+
+resource "aws_iam_role_policy_attachment" "ecs_role" {
+  role       = aws_iam_role.ecs_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+}
+
+resource "aws_cloudwatch_log_group" "log" {
+  name              = "/ecs/${var.project_name}"
+  retention_in_days = 30
 }
 
 data "aws_region" "current" {
@@ -13,7 +37,7 @@ resource "aws_ecs_task_definition" "project_1" {
   memory                   = var.memory
   network_mode             = var.network_mode
   tags                     = var.tags
-  execution_role_arn       = data.aws_iam_role.ecs_role.arn
+  execution_role_arn       = aws_iam_role.ecs_role.arn
 
   container_definitions = jsonencode(
     [
@@ -57,7 +81,7 @@ resource "aws_ecs_task_definition" "project_1" {
         logConfiguration = {
           logDriver = "awslogs"
           options = {
-            awslogs-group         = "/ecs/${var.project_name}"
+            awslogs-group         = aws_cloudwatch_log_group.log.name
             awslogs-region        = data.aws_region.current.name
             awslogs-stream-prefix = "ecs"
           }
@@ -96,6 +120,6 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "ssm-attach" {
-  role       = data.aws_iam_role.ecs_role.name
+  role       = aws_iam_role.ecs_role.name
   policy_arn = aws_iam_policy.get_ssm.arn
 }
