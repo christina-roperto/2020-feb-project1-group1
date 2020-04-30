@@ -1,5 +1,3 @@
-# https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html
-
 resource "aws_iam_role" "ecs_role" {
   name = "${var.project_name}-ecsTaskExecutionRole"
   assume_role_policy = jsonencode(
