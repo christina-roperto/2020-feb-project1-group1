@@ -72,8 +72,8 @@ module "aurora-db" {
 
   scaling_configuration = {
     auto_pause               = true
-    max_capacity             = 32
-    min_capacity             = 8
+    max_capacity             = 1
+    min_capacity             = 1
     seconds_until_auto_pause = 300
     timeout_action           = "ForceApplyCapacityChange"
   }
