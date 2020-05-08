@@ -1,6 +1,6 @@
 resource "aws_efs_file_system" "project_1" {
   creation_token = "wordpress"
-  encrypted ="false"
+  encrypted ="true"
 
   tags = {
     Name = var.project_name
