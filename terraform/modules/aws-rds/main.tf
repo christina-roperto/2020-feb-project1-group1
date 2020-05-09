@@ -14,8 +14,8 @@ resource "aws_rds_cluster" "default" {
   engine_version            = var.engine_version
   port                      = var.port
   database_name             = var.database_name
-  master_username           = data.aws_ssm_parameter.db_user.value
-  master_password           = data.aws_ssm_parameter.db_password.value
+  master_username           = aws_ssm_parameter.db_user.value
+  master_password           = aws_ssm_parameter.db_password.value
   availability_zones        = var.availability_zones
   vpc_security_group_ids    = [aws_security_group.default.id]
   skip_final_snapshot       = var.skip_final_snapshot
@@ -78,13 +78,24 @@ resource "aws_ssm_parameter" "db_name" {
   type  = "SecureString"
   value =  var.database_name
   overwrite = true
-
 } 
 
-data "aws_ssm_parameter" "db_user" {
+resource "aws_ssm_parameter" "db_user" {
   name = "PROJ1_DB_USER"
+  type  = "SecureString"
+  value =  "admin_rds"
+  overwrite = false
 }
 
-data "aws_ssm_parameter" "db_password" {
+resource "aws_ssm_parameter" "db_password" {
   name = "PROJ1_DB_PASSWORD"
+  type  = "SecureString"
+  value =  random_password.db_password.result
+  overwrite = false
+}
+
+resource "random_password" "db_password" {
+  length = 10
+  special = true
+  override_special = "!#*"
 }
