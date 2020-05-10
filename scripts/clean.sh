@@ -4,4 +4,3 @@ rm -f terraform/terraform.tfstate
 rm -f terraform/aws
 rm -f terraform/ecr
 rm -f .env
-rm -f terraform/repo.txt

@@ -9,3 +9,10 @@ resource "aws_ecr_repository" "ecr" {
     Environment = var.project_name
   }
 }
+
+resource "aws_ssm_parameter" "ecr_url" {
+  name  ="PROJ1_ECR_URL"
+  type  = "SecureString"
+  value =  aws_ecr_repository.ecr.repository_url
+  overwrite = true
+} 

@@ -9,10 +9,6 @@ all: plan build deploy
 
 prepare:
 	if [ ! -f .env ]; then cp -v .env.example .env ; fi
-	$(COMPOSE_RUN) make _prepare
-
-_prepare:
-	bash -x scripts/ssm_parameters.sh
 
 plan:
 	make prepare
