@@ -12,6 +12,7 @@ module "aws-ecr" {
 module "aws-ecs-task-def" {
   source               = "./modules/aws-ecs-task-def"
   repository_url       = module.aws-ecr.repository_url
+  repository_version   = var.repository_version
   family               = var.project_name
   file_system_dns_name = module.aws-efs.dns_name
   file_system_id       = module.aws-efs.id
@@ -56,8 +57,8 @@ module "aws-efs" {
   source       = "./modules/aws-efs"
   project_name = var.project_name
   subnet_ids   = module.networking.subnet_private_ids
-  sg_id = module.aws-alb.alb_security_group_id
-  vpc_id = module.networking.vpc_id
+  sg_id        = module.aws-alb.alb_security_group_id
+  vpc_id       = module.networking.vpc_id
 }
 
 module "aurora-db" {

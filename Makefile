@@ -9,6 +9,7 @@ all: plan build deploy
 
 prepare:
 	if [ ! -f .env ]; then cp -v .env.example .env ; fi
+	git rev-parse --short HEAD > repo_version.txt
 
 plan:
 	make prepare

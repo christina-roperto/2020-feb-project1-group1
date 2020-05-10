@@ -43,7 +43,7 @@ resource "aws_ecs_task_definition" "project_1" {
     [
       {
         name      = "project_1"
-        image     = "${var.repository_url}:latest"
+        image     = "${var.repository_url}:${var.repository_version}"
         essential = true
         cpu       = 256
         memory    = 512
@@ -55,22 +55,22 @@ resource "aws_ecs_task_definition" "project_1" {
           }
         ],
         secrets = [
-          { 
+          {
             name = "WORDPRESS_DB_HOST"
             valueFrom = "PROJ1_DB_HOST"
           },
-          { 
+          {
             name = "WORDPRESS_DB_USER"
             valueFrom = "PROJ1_DB_USER"
-          }, 
-          { 
+          },
+          {
             name = "WORDPRESS_DB_PASSWORD"
             valueFrom = "PROJ1_DB_PASSWORD"
-          }, 
-          { 
+          },
+          {
             name = "WORDPRESS_DB_NAME"
             valueFrom = "PROJ1_DB_NAME"
-          }             
+          }
         ]
         portMappings = [
           {
