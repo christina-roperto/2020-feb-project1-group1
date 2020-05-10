@@ -1,30 +1,35 @@
-name: Docker Image CI
+# This workflow will build and push a new container image to Amazon ECR
 
 on:
-  push:
-    branches: [ LuizFDS/CI/CD ]
-  pull_request:
-    branches: [ LuizFDS/CI/CD ]
+  release:
+    types: [created]
+
+name: Deploy to Amazon ECS
 
 jobs:
-
-  build:
-
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
 
     steps:
-    - name: Configure AWS Credentials
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS }}
-    
-    - name: Build the Docker image
-      uses: actions/checkout@v2
-      env:
-        AWS_PROFILE
-        TF_VAR_project_name: wdpress-dev
-      run:  echo ${AWS_ACCESS_ID} && \
-            aws configure set aws_access_key_id ${AWS_ACCESS_ID} && \
-            aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS} && \
-            make build
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-2
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Build, tag, and push image to Amazon ECR
+      id: build-image
+      run: |
+        # Build a docker container and
+        # push it to ECR so that it can
+        # be deployed to ECS.
+        make build
