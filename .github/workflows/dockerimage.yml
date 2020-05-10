@@ -1,10 +1,10 @@
-# This workflow will build and push a new container image to Amazon ECR
+name: Docker Image CI
 
 on:
-  release:
-    types: [created]
-
-name: Deploy to Amazon ECS
+  push:
+    branches: [ LuizFDS/CI/CD ]
+  pull_request:
+    branches: [ LuizFDS/CI/CD ]
 
 jobs:
   deploy:
