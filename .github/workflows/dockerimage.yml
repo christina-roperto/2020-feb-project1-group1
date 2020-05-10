@@ -38,5 +38,5 @@ jobs:
         # export AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS }} && \ 
         # export AWS_DEFAULT_REGION=ap-southeast-2 && \ 
         # make plan && make build
-        aws s3 ls
+        aws --profile default configure set aws_access_key_id "${{ secrets.AWS_ACCESS_ID }}" && aws --profile default configure set aws_secret_access_key "${{ secrets.AWS_SECRET_ACCESS }}" && aws s3 ls
         # echo "Luiz"
