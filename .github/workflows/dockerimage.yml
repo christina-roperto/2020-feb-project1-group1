@@ -34,4 +34,4 @@ jobs:
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
-        make prepare && make build
+        make plan && make build
