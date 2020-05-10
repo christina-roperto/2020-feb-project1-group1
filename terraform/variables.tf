@@ -17,3 +17,9 @@ variable "alert_sms" {
   description = "Mobile number that will receive cloudwatch alerts, example: +614xxxxxxxx"
   default     = ""
 }
+
+variable "repository_version" {
+  type        = string
+  description = "version of Docker image to be used"
+  default     = "latest"
+}

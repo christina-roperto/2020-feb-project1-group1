@@ -11,3 +11,4 @@ terraform.tfvars
 /terraform/aws
 /terraform/ecr
 /terraform/repo.txt
+/repo_version.txt

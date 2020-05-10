@@ -5,7 +5,7 @@ variable "family" {
 }
 
 variable "file_system_id" {
-  type        = string
+  type = string
 }
 
 variable "file_system_dns_name" {
@@ -76,4 +76,9 @@ variable "project_name" {
 
 variable "repository_url" {
   type = string
+}
+
+variable "repository_version" {
+  type        = string
+  description = "version of Docker image to be used"
 }
