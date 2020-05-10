@@ -29,7 +29,6 @@ jobs:
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       env:
-        AWS_PROFILE
         TF_VAR_project_name: wdpress-dev
       run: |
         # Build a docker container and
