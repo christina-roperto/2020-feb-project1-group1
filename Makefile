@@ -1,5 +1,7 @@
 #Makefile
 COMPOSE_RUN = docker-compose build && docker-compose run --rm tf012aws2
+export AWS_ACCESS_KEY_ID ?= ${{ secrets.AWS_ACCESS_KEY_ID }}
+export AWS_SECRET_ACCESS_KEY ?= ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 #.SILENT
 
