@@ -29,14 +29,14 @@ jobs:
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       env:
-        AWS_ACCESS_ID: ${{ secrets.AWS_ACCESS_ID }}
-        AWS_SECRET_ACCESS: ${{ secrets.AWS_SECRET_ACCESS }}
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS }}
+        AWS_ACCESS_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
-        # export AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_ID }} && \ 
-        # export AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS }} && \ 
+        # export AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} && \ 
+        # export AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} && \ 
         # export AWS_DEFAULT_REGION=ap-southeast-2 && \ 
         # make plan && make build
-        aws --profile default configure set aws_access_key_id "${{ secrets.AWS_ACCESS_ID }}" && aws --profile default configure set aws_secret_access_key "${{ secrets.AWS_SECRET_ACCESS }}" && aws s3 ls
+        aws --profile default configure set aws_access_key_id "${{ secrets.AWS_ACCESS_KEY_ID }}" && aws --profile default configure set aws_secret_access_key "${{ secrets.AWS_SECRET_ACCESS_KEY }}" && aws s3 ls
         # echo "Luiz"
