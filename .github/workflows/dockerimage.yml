@@ -16,10 +16,10 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Build, tag, and push image to Amazon ECR
-      # id: build-image
-      # env:
-      #   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #   AWS_DEFAULT_REGION: "ap-southeast-2"
+      id: build-image
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: "ap-southeast-2"
       run: |
         make plan && make build
