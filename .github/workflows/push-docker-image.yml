@@ -1,10 +1,6 @@
 name: Docker Image CI
 
 on:
-  push:
-    branches: [ LuizFDS/CI/CD ]
-    paths:
-      - docker/wordpress/Dockerfile
   pull_request:
     branches: [ master ]
     paths:
