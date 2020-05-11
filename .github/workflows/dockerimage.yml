@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ master ]
     paths:
-      - .github/workflows/dockerimage.yml
+      - docker/wordpress/*
 
 jobs:
   deploy:
@@ -17,8 +17,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       
-      - id: file_changes
-        uses: trilom/file-changes-action@v1.2.3
+      # - id: file_changes
+      #   uses: trilom/file-changes-action@v1.2.3
       
       - name: test
         run: |
