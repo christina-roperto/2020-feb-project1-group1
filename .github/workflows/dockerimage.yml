@@ -22,7 +22,7 @@ jobs:
         run: |
           files_modified = $('${{ steps.file_changes.outputs.files_modified }}')
           echo $files_modified
-          echo [[ " ${files_modified[@]}} " =~ ".github/workflows/dockerimage.yml" ]] && echo "YES" || echo "NO";
+      # echo [[ " ${files_modified[@]}} " =~ ".github/workflows/dockerimage.yml" ]] && echo "YES" || echo "NO";
       # - name: Build, tag, and push image to Amazon ECR
       #   id: build-image
       #   env:
