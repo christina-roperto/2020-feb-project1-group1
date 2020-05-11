@@ -4,7 +4,7 @@ on:
   push:
     branches: [ LuizFDS/CI/CD ]
     paths:
-      - docker/wordpress/*
+      - docker/wordpress/Dockerfile
   pull_request:
     branches: [ master ]
     paths:
