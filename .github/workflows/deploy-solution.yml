@@ -3,8 +3,6 @@ name: Deploy Solution CI
 on:
   push:
     branches: [ master ]
-    paths:
-      - docker/wordpress/Dockerfile
   
 jobs:
   deploy:
