@@ -20,14 +20,8 @@ jobs:
       
       - name: test
         run: |
-          cat $HOME/files.json
           cat $HOME/files_modified.json
-          cat $HOME/files_added.json
-          cat $HOME/files_removed.json
-          echo '${{ steps.file_changes.outputs.files}}'
           echo '${{ steps.file_changes.outputs.files_modified}}'
-          echo '${{ steps.file_changes.outputs.files_added}}'
-          echo '${{ steps.file_changes.outputs.files_removed}}'
 
       # - name: Build, tag, and push image to Amazon ECR
       #   id: build-image
