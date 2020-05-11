@@ -3,6 +3,8 @@ name: Docker Image CI
 on:
   push:
     branches: [ LuizFDS/CI/CD ]
+    paths:
+      - docker/wordpress/*
   pull_request:
     branches: [ master ]
     paths:
@@ -27,6 +29,7 @@ jobs:
           # echo $(steps.file_changes.outputs.files_modified)
           # echo [[ " ${steps.file_changes.outputs.files_modified[@]}} " =~ ".github/workflows/dockerimage.yml" ]] && echo "YES" || echo "NO";
           echo 'it works'
+      
       # - name: Build, tag, and push image to Amazon ECR
       #   id: build-image
       #   env:
