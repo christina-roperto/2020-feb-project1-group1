@@ -20,7 +20,6 @@ jobs:
       
       - name: test
         run: |
-          cat $HOME/files_modified.json
           echo '${{ steps.file_changes.outputs.files_modified}}'
 
       # - name: Build, tag, and push image to Amazon ECR
