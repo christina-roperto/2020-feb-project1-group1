@@ -19,22 +19,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       
-      # - id: file_changes
-      #   uses: trilom/file-changes-action@v1.2.3
-      
-      - name: test
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: "ap-southeast-2"
         run: |
-          # files_modified = $('${{ steps.file_changes.outputs.files_modified }}')
-          # echo $files_modified
-          # echo $(steps.file_changes.outputs.files_modified)
-          # echo [[ " ${steps.file_changes.outputs.files_modified[@]}} " =~ ".github/workflows/dockerimage.yml" ]] && echo "YES" || echo "NO";
-          echo 'it works'
-      
-      # - name: Build, tag, and push image to Amazon ECR
-      #   id: build-image
-      #   env:
-      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #     AWS_DEFAULT_REGION: "ap-southeast-2"
-      #   run: |
-      #     make plan && make build
+          make plan && make build
