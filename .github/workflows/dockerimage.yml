@@ -21,8 +21,7 @@ jobs:
       - name: test
         run: |
           echo '${{ steps.file_changes.outputs.files_modified }}'
-          value = '.github/workflows/dockerimage.yml'
-          echo [[ " ${steps.file_changes.outputs.files_modified[@]} " =~ " ${value} " ]] && echo "YES" || echo "NO";
+          echo [[ " ${steps.file_changes.outputs.files_modified[@]} " =~ ".github/workflows/dockerimage.yml" ]] && echo "YES" || echo "NO";
       # - name: Build, tag, and push image to Amazon ECR
       #   id: build-image
       #   env:
