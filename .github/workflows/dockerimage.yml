@@ -5,8 +5,8 @@ on:
     branches: [ LuizFDS/CI/CD ]
   pull_request:
     branches: [ master ]
-  paths:
-    - .github/workflows/dockerimage.yml
+    paths:
+      - .github/workflows/dockerimage.yml
 
 jobs:
   deploy:
