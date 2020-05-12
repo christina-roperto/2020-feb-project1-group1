@@ -1,3 +1,37 @@
+data "aws_region" "current" {
+}
+
+resource "aws_ecs_service" "ecs" {
+  name             = var.project_name
+  cluster          = aws_ecs_cluster.project_1.id
+  task_definition  = aws_ecs_task_definition.project_1.arn
+  launch_type      = var.launch_type
+  platform_version = var.platform_version
+  desired_count    = var.desired_count
+
+  network_configuration {
+    assign_public_ip = var.assign_public_ip
+    subnets          = var.subnet_ids
+    security_groups  = [var.security_group_id]
+  }
+
+  load_balancer {
+    target_group_arn = var.target_group_arn
+    container_name   = var.container_name
+    container_port   = var.container_port
+  }
+
+  depends_on = [var.ecs_service_depends_on]
+}
+
+resource "aws_ecs_cluster" "project_1" {
+  name = var.project_name
+
+  tags = {
+    Environment = var.project_env
+  }
+}
+
 resource "aws_iam_role" "ecs_role" {
   name = "${var.project_name}-ecsTaskExecutionRole"
   assume_role_policy = jsonencode(
@@ -23,13 +57,9 @@ resource "aws_iam_role_policy_attachment" "ecs_role" {
 
 resource "aws_cloudwatch_log_group" "log" {
   name              = "/ecs/${var.project_name}"
-  retention_in_days = 30
+  retention_in_days = var.retention_in_days
 }
 
-data "aws_region" "current" {
-}
-
-# AWS Task Definition
 resource "aws_ecs_task_definition" "project_1" {
   family                   = var.family
   requires_compatibilities = var.requires_compatibilities
@@ -45,37 +75,37 @@ resource "aws_ecs_task_definition" "project_1" {
         name      = "project_1"
         image     = "${var.repository_url}:${var.repository_version}"
         essential = true
-        cpu       = 256
-        memory    = 512
+        cpu       = var.cpu
+        memory    = var.memory
         mountPoints = [
           {
-            sourceVolume = var.volume_name
+            sourceVolume  = var.volume_name
             containerPath = "/var/www/html"
-            readOnly = false
+            readOnly      = false
           }
         ],
         secrets = [
           {
-            name = "WORDPRESS_DB_HOST"
+            name      = "WORDPRESS_DB_HOST"
             valueFrom = "PROJ1_DB_HOST"
           },
           {
-            name = "WORDPRESS_DB_USER"
+            name      = "WORDPRESS_DB_USER"
             valueFrom = "PROJ1_DB_USER"
           },
           {
-            name = "WORDPRESS_DB_PASSWORD"
+            name      = "WORDPRESS_DB_PASSWORD"
             valueFrom = "PROJ1_DB_PASSWORD"
           },
           {
-            name = "WORDPRESS_DB_NAME"
+            name      = "WORDPRESS_DB_NAME"
             valueFrom = "PROJ1_DB_NAME"
           }
         ]
         portMappings = [
           {
-            containerPort = 80
-            hostPort      = 80
+            containerPort = var.containerPort
+            hostPort      = var.hostPort
           }
         ]
         logConfiguration = {
