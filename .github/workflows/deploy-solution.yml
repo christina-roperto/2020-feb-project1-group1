@@ -3,6 +3,8 @@ name: Deploy Solution CI
 on:
   push:
     branches: [ master ]
+    paths:
+      - terraform/*
   
 jobs:
   deploy:
