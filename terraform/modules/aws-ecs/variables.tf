@@ -1,3 +1,63 @@
+variable "project_name" {
+  type = string
+}
+
+variable "subnet_ids" {
+  type = list(string)
+}
+
+variable "vpc_id" {
+  type = string
+}
+
+variable "container_name" {
+  type = string
+}
+
+variable "container_port" {
+  type = string
+}
+
+variable "alb_id" {
+  type = string
+}
+
+variable "security_group_id" {
+  type = string
+}
+
+variable "target_group_arn" {
+  type = string
+}
+
+variable "ecs_service_depends_on" {
+  type = any
+}
+
+variable "launch_type" {
+  type    = string
+  default = "FARGATE"
+}
+
+variable "platform_version" {
+  type    = string
+  default = "1.4.0"
+}
+
+variable "desired_count" {
+  type    = number
+  default = 2
+}
+
+variable "assign_public_ip" {
+  type    = bool
+  default = true
+}
+
+variable "project_env" {
+  type = string
+}
+
 ## Required arguments
 variable "family" {
   type        = string
@@ -20,13 +80,13 @@ variable "requires_compatibilities" {
 }
 
 variable "cpu" {
-  type        = string
+  type        = number
   description = "(Optional) The number of cpu units used by the task. If the requires_compatibilities is FARGATE this field is required."
   default     = 256
 }
 
 variable "memory" {
-  type        = string
+  type        = number
   description = "(Optional) The amount (in MiB) of memory used by the task. If the requires_compatibilities is FARGATE this field is required."
   default     = 512
 }
@@ -70,10 +130,6 @@ variable "file_system_type" {
   default = "nfs"
 }
 
-variable "project_name" {
-  type = string
-}
-
 variable "repository_url" {
   type = string
 }
@@ -81,4 +137,19 @@ variable "repository_url" {
 variable "repository_version" {
   type        = string
   description = "version of Docker image to be used"
+}
+
+variable "retention_in_days" {
+  type    = number
+  default = 30
+}
+
+variable "containerPort" {
+  type    = number
+  default = 80
+}
+
+variable "hostPort" {
+  type    = number
+  default = 80
 }

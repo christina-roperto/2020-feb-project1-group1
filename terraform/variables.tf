@@ -23,3 +23,13 @@ variable "repository_version" {
   description = "version of Docker image to be used"
   default     = "latest"
 }
+
+variable "container_name" {
+  type    = string
+  default = "project_1"
+}
+
+variable "container_port" {
+  type    = string
+  default = "80"
+}
