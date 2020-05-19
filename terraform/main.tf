@@ -49,6 +49,7 @@ module "aws-efs" {
   subnet_ids   = module.networking.subnet_private_ids
   sg_id        = module.aws-alb.alb_security_group_id
   vpc_id       = module.networking.vpc_id
+  cidr_vpc     = var.cidr_vpc
 }
 
 module "aurora-db" {
@@ -60,6 +61,7 @@ module "aurora-db" {
   engine_mode        = "serverless"
   env_prefix         = "dev"
   storage_encrypted  = true
+  cidr_vpc           = var.cidr_vpc
 
   scaling_configuration = {
     auto_pause               = true
