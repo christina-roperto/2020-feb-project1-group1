@@ -71,9 +71,13 @@ module "aurora-db" {
 }
 
 module "cloudwatch" {
-  source         = "./modules/aws-cloudwatch"
-  project_name   = var.project_name
-  alert_sms      = var.alert_sms
-  rds_cluster_id = module.aurora-db.cluster_identifier
-  alb_arn_suffix = module.aws-alb.alb_arn_suffix
+  source           = "./modules/aws-cloudwatch"
+  project_name     = var.project_name
+  alert_sms        = var.alert_sms
+  rds_cluster_id   = module.aurora-db.cluster_identifier
+  alb_arn_suffix   = module.aws-alb.alb_arn_suffix
+  ecs_cluster_name = module.aws-ecs.ecs_cluster_name
+  ecs_service_name = module.aws-ecs.ecs_service_name
+  policy_cpu_low   = module.aws-ecs.policy_cpu_low
+  policy_cpu_high  = module.aws-ecs.policy_cpu_high
 }
