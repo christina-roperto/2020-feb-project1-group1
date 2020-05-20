@@ -112,3 +112,7 @@ variable "scaling_configuration" {
   type        = map(string)
   default     = {}
 }
+
+variable "cidr_vpc" {
+  type = string
+}

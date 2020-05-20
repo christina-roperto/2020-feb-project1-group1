@@ -50,14 +50,14 @@ resource "aws_security_group" "default" {
     protocol    = "tcp"
     from_port   = 3306
     to_port     = 3306
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = [var.cidr_vpc]
   }
 
   egress {
     protocol    = -1
     from_port   = 0
     to_port     = 0
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = [var.cidr_vpc]
   }
 
   tags = {

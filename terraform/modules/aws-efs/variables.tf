@@ -13,3 +13,7 @@ variable "sg_id" {
 variable "vpc_id" {
   type = string
 }
+
+variable "cidr_vpc" {
+  type = string
+}
