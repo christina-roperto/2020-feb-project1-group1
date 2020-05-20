@@ -153,3 +153,51 @@ resource "aws_iam_role_policy_attachment" "ssm-attach" {
   role       = aws_iam_role.ecs_role.name
   policy_arn = aws_iam_policy.get_ssm.arn
 }
+
+resource "aws_appautoscaling_target" "main" {
+  max_capacity       = 4
+  min_capacity       = 2
+  resource_id        = "service/${aws_ecs_cluster.project_1.name}/${aws_ecs_service.ecs.name}"
+  scalable_dimension = "ecs:service:DesiredCount"
+  service_namespace  = "ecs"
+}
+
+resource "aws_appautoscaling_policy" "cpu_high" {
+  name               = "${var.project_name}-ecs_service-scale_out-cpu_utilization"
+  resource_id        = "service/${aws_ecs_cluster.project_1.name}/${aws_ecs_service.ecs.name}"
+  scalable_dimension = "ecs:service:DesiredCount"
+  service_namespace  = "ecs"
+
+  step_scaling_policy_configuration {
+    adjustment_type         = "ChangeInCapacity"
+    cooldown                = var.autoscale_cooldown
+    metric_aggregation_type = "Average"
+
+    step_adjustment {
+      metric_interval_lower_bound = var.scale_out_step_adjustment["metric_interval_lower_bound"]
+      scaling_adjustment          = var.scale_out_step_adjustment["scaling_adjustment"]
+    }
+  }
+
+  depends_on = [aws_appautoscaling_target.main]
+}
+
+resource "aws_appautoscaling_policy" "cpu_low" {
+  name               = "${var.project_name}-ecs_service-scale_in-cpu_utilization"
+  resource_id        = "service/${aws_ecs_cluster.project_1.name}/${aws_ecs_service.ecs.name}"
+  scalable_dimension = "ecs:service:DesiredCount"
+  service_namespace  = "ecs"
+
+  step_scaling_policy_configuration {
+    adjustment_type         = "ChangeInCapacity"
+    cooldown                = var.autoscale_cooldown
+    metric_aggregation_type = "Average"
+
+    step_adjustment {
+      metric_interval_upper_bound = var.scale_in_step_adjustment["metric_interval_upper_bound"]
+      scaling_adjustment          = var.scale_in_step_adjustment["scaling_adjustment"]
+    }
+  }
+
+  depends_on = [aws_appautoscaling_target.main]
+}
