@@ -12,7 +12,7 @@ Solution based on AWS to install wordpress site with Fargate and Aurora DB Clust
 - Docker-compose 
 - Git
 - Bash
-- AWS CLI
+- AWS CLI 2.0
 
 ## Usage
 
@@ -67,4 +67,78 @@ Clean:
 Delete files and docker images created on plan, build and deploy targets.
 ```
 make clean
+```
+
+## Predefined values
+
+Wordpress Version:
+```
+wordpress:5.4.0-php7.2-apache
+ECR versioning: git rev-parse --short HEAD
+```
+
+Terraform version:
+```
+terraform/0.12.24
+```
+
+Terraform backend:
+```
+"./.tfstate/terraform.tfstate"
+```
+
+VPC:
+```
+aws region: ap-southeast-2
+cidr: 10.10.0.0/16
+```
+
+Application Load Balancer:
+```
+port: 80
+```
+
+Cloudwatch:
+```
+ALB high response time: 3
+ECS high cpu usage: 80%
+ECS low cpu usage: 2%
+RDS high cpu usage: 70%
+```
+
+SSM Parameters:
+```
+PROJ1_ECR_URL
+PROJ1_DB_HOST
+PROJ1_DB_USER: random string 
+PROJ1_DB_PASSWORD: random string
+PROJ1_DB_NAME
+```
+
+ECS:
+```
+Autoscaling task: Min 2, Max 4, Desired 2
+Type: FARGATE
+Platform_version: 1.4.0
+Task CPU: 256
+Task Memory: 512
+```
+
+EFS:
+```
+Encrypted: true
+```
+
+RDS:
+```
+Aurora MySQL Serveless
+Version: 5.6.10a
+Encrypted: true
+```
+
+CI/CD:
+```
+Github actions:
+on push terraform/**: make plan && make deploy
+on pull_request docker/wordpress/Dockerfile: make plan && make build
 ```
