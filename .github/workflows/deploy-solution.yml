@@ -2,7 +2,7 @@ name: Deploy Solution CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ test-kiko ]
     paths:
       - terraform/**
   
