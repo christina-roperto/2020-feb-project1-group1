@@ -20,11 +20,15 @@ _plan:
 	bash -x scripts/plan_aws.sh
 
 build:
-	$(COMPOSE_RUN) make _build
-	bash -x scripts/push_image.sh
+	make plan
+	@$(COMPOSE_RUN) make _build
+	@make _push
 
 _build:
-	bash -x scripts/apply_ecr.sh
+	@bash scripts/apply_ecr.sh
+
+_push:
+	@bash scripts/push_image.sh
 
 deploy:
 	$(COMPOSE_RUN) make _deploy
@@ -34,6 +38,7 @@ _deploy:
 	bash -x scripts/apply_aws.sh
 
 destroy:
+	make prepare
 	$(COMPOSE_RUN) make _destroy
 
 _destroy:
