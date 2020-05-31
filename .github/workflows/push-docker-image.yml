@@ -20,4 +20,4 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: "ap-southeast-2"
         run: |
-          make plan && make build
+          make plan && make _push

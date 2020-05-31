@@ -28,6 +28,12 @@ Set up your AWS credentials:
 aws configure
 ```
 
+Set up a s3 bucket and update the file:
+
+```
+terraform/_backend.tf
+```
+
 Prepare (optional)
 
 Run `make prepare` and edit your `.env` file to your preferences.
