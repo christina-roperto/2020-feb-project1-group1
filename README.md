@@ -90,7 +90,7 @@ terraform/0.12.24
 
 Terraform backend:
 ```
-"./.tfstate/terraform.tfstate"
+AWS S3 - "wdpress/terraform.tfstate"
 ```
 
 VPC:
